@@ -1,0 +1,63 @@
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import './globals.css';
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+});
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://pixeldrop.com';
+
+export const metadata: Metadata = {
+  title: {
+    default: 'PixelDrop — Beautiful Digital Wallpapers',
+    template: '%s | PixelDrop',
+  },
+  description:
+    'Hand-crafted wallpapers for iPhone, desktop and beyond. Instant delivery to your inbox.',
+  metadataBase: new URL(siteUrl),
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: siteUrl,
+    siteName: 'PixelDrop',
+    title: 'PixelDrop — Beautiful Digital Wallpapers',
+    description:
+      'Hand-crafted wallpapers for iPhone, desktop and beyond. Instant delivery to your inbox.',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'PixelDrop — Beautiful Digital Wallpapers',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'PixelDrop — Beautiful Digital Wallpapers',
+    description:
+      'Hand-crafted wallpapers for iPhone, desktop and beyond. Instant delivery to your inbox.',
+    images: ['/og-image.png'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en" className={inter.variable}>
+      <body className="min-h-screen bg-[#0A0A0A] text-[#EDEDED] antialiased">
+        {children}
+      </body>
+    </html>
+  );
+}

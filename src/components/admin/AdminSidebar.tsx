@@ -7,6 +7,7 @@ import {
   LayoutDashboard,
   Package,
   Receipt,
+  Wand2,
   LogOut,
   Menu,
   X,
@@ -18,6 +19,7 @@ const navItems = [
   { label: 'Dashboard', href: '/admin/dashboard', icon: LayoutDashboard },
   { label: 'Products', href: '/admin/products', icon: Package },
   { label: 'Orders', href: '/admin/orders', icon: Receipt },
+  { label: 'Playground', href: '/admin/playground', icon: Wand2 },
 ];
 
 export function AdminSidebar() {

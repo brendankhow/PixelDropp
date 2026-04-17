@@ -68,6 +68,19 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* Trust bar */}
+      <div className="border-y border-edge bg-page-alt">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-8 text-sm text-fg-muted">
+            <span className="flex items-center gap-2"><span className="text-emerald-400 font-bold">✓</span>Instant email delivery</span>
+            <span className="hidden sm:block text-edge-2">·</span>
+            <span className="flex items-center gap-2"><span className="text-emerald-400 font-bold">✓</span>High resolution files</span>
+            <span className="hidden sm:block text-edge-2">·</span>
+            <span className="flex items-center gap-2"><span className="text-emerald-400 font-bold">✓</span>Secure checkout via Stripe</span>
+          </div>
+        </div>
+      </div>
+
       {/* Featured latest drop */}
       {featured && (
         <section className="border-b border-edge bg-page-alt">

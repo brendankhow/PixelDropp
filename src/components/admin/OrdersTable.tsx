@@ -2,7 +2,7 @@
 
 import { useState, useTransition, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
-import { Search, ChevronLeft, ChevronRight, Mail, RotateCcw } from 'lucide-react';
+import { Search, ChevronLeft, ChevronRight, Mail, RotateCcw, CheckCircle, XCircle } from 'lucide-react';
 import { toast } from 'sonner';
 import { Badge } from '@/components/ui/Badge';
 import { Spinner } from '@/components/ui/Spinner';
@@ -150,7 +150,7 @@ export function OrdersTable({ orders }: OrdersTableProps) {
           <table className="w-full min-w-[800px]">
             <thead>
               <tr className="border-b border-[#1F1F1F] bg-[#0D0D0D]">
-                {['Customer', 'Products', 'Amount', 'Status', 'Date', 'Actions'].map((h) => (
+                {['Customer', 'Products', 'Amount', 'Status', 'Email', 'Date', 'Actions'].map((h) => (
                   <th
                     key={h}
                     className="px-4 py-3 text-left text-xs font-semibold text-[#6B7280] uppercase tracking-wider"
@@ -206,6 +206,26 @@ export function OrdersTable({ orders }: OrdersTableProps) {
                       <Badge variant={statusVariant[order.status]}>
                         {order.status.charAt(0).toUpperCase() + order.status.slice(1)}
                       </Badge>
+                    </td>
+
+                    {/* Email */}
+                    <td className="px-4 py-3">
+                      {order.email_sent_at ? (
+                        <div className="flex items-center gap-1.5">
+                          <CheckCircle size={14} className="text-emerald-500 shrink-0" />
+                          <span className="text-xs text-[#9CA3AF]">
+                            {new Date(order.email_sent_at).toLocaleDateString('en-US', {
+                              month: 'short',
+                              day: 'numeric',
+                            })}
+                          </span>
+                        </div>
+                      ) : (
+                        <div className="flex items-center gap-1.5">
+                          <XCircle size={14} className="text-red-500 shrink-0" />
+                          <span className="text-xs text-[#6B7280]">Not sent</span>
+                        </div>
+                      )}
                     </td>
 
                     {/* Date */}

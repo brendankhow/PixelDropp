@@ -186,7 +186,11 @@ async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Session) 
     console.log(`[webhook] Delivery email sent for order ${orderId} → ${customerEmail}`);
   } catch (emailErr) {
     // Email failed — order stays 'paid' so admin can resend from /admin/orders
-    console.error(`[webhook] Email delivery failed for order ${orderId}:`, emailErr);
+    const errMsg = emailErr instanceof Error ? emailErr.message : String(emailErr);
+    const errDetail = emailErr instanceof Error && (emailErr as any).response?.body
+      ? JSON.stringify((emailErr as any).response.body)
+      : '';
+    console.error(`[webhook] Email delivery failed for order ${orderId}: ${errMsg} ${errDetail}`);
   }
 }
 

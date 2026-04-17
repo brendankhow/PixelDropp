@@ -64,21 +64,21 @@ export function CartDrawer() {
         {/* Drawer panel */}
         <Dialog.Content
           aria-describedby={undefined}
-          className="fixed right-0 top-0 z-50 h-full w-full max-w-md bg-[#111111] border-l border-[#1F1F1F] shadow-2xl flex flex-col data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right duration-300"
+          className="fixed right-0 top-0 z-50 h-full w-full max-w-md bg-card border-l border-edge shadow-2xl flex flex-col data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right duration-300"
         >
           {/* Header */}
-          <div className="flex items-center justify-between px-6 py-5 border-b border-[#1F1F1F]">
-            <Dialog.Title className="text-lg font-semibold text-[#EDEDED]">
+          <div className="flex items-center justify-between px-6 py-5 border-b border-edge">
+            <Dialog.Title className="text-lg font-semibold text-fg">
               Your Cart{' '}
               {!isEmpty && (
-                <span className="text-sm font-normal text-[#9CA3AF]">
+                <span className="text-sm font-normal text-fg-muted">
                   ({items.reduce((s, i) => s + i.quantity, 0)} items)
                 </span>
               )}
             </Dialog.Title>
             <Dialog.Close asChild>
               <button
-                className="rounded-lg p-2 text-[#9CA3AF] hover:text-[#EDEDED] hover:bg-[#1F1F1F] transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
+                className="rounded-lg p-2 text-fg-muted hover:text-fg hover:bg-edge transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
                 aria-label="Close cart"
               >
                 <X size={20} />
@@ -90,10 +90,10 @@ export function CartDrawer() {
           <div className="flex-1 overflow-y-auto px-6 py-4">
             {isEmpty ? (
               <div className="flex flex-col items-center justify-center h-full gap-4 text-center">
-                <ShoppingBag size={48} className="text-[#2D2D2D]" />
+                <ShoppingBag size={48} className="text-edge-2" />
                 <div>
-                  <p className="text-[#EDEDED] font-medium">Your cart is empty.</p>
-                  <p className="text-[#9CA3AF] text-sm mt-1">Start shopping ↑</p>
+                  <p className="text-fg font-medium">Your cart is empty.</p>
+                  <p className="text-fg-muted text-sm mt-1">Start shopping ↑</p>
                 </div>
                 <Dialog.Close asChild>
                   <Button variant="secondary" size="md">
@@ -123,10 +123,10 @@ export function CartDrawer() {
                   {items.map(({ product, quantity }) => (
                     <li
                       key={product.id}
-                      className="flex gap-4 py-4 border-b border-[#1F1F1F] last:border-0"
+                      className="flex gap-4 py-4 border-b border-edge last:border-0"
                     >
                       {/* Thumbnail */}
-                      <div className="relative w-16 h-16 rounded-lg overflow-hidden bg-[#1F1F1F] shrink-0">
+                      <div className="relative w-16 h-16 rounded-lg overflow-hidden bg-edge shrink-0">
                         {product.preview_image_url ? (
                           <Image
                             src={product.preview_image_url}
@@ -136,7 +136,7 @@ export function CartDrawer() {
                             sizes="64px"
                           />
                         ) : (
-                          <div className="w-full h-full flex items-center justify-center text-[#2D2D2D]">
+                          <div className="w-full h-full flex items-center justify-center text-edge-2">
                             <ShoppingBag size={20} />
                           </div>
                         )}
@@ -152,29 +152,29 @@ export function CartDrawer() {
 
                       {/* Details */}
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-[#EDEDED] truncate">
+                        <p className="text-sm font-medium text-fg truncate">
                           {product.name}
                         </p>
-                        <p className="text-sm text-[#9CA3AF] mt-0.5">
+                        <p className="text-sm text-fg-muted mt-0.5">
                           {formatPrice(product.price)}
                         </p>
 
                         {/* Quantity + remove */}
                         <div className="flex items-center gap-3 mt-2">
-                          <div className="flex items-center gap-1 bg-[#1A1A1A] rounded-lg border border-[#2D2D2D]">
+                          <div className="flex items-center gap-1 bg-card-alt rounded-lg border border-edge-2">
                             <button
                               onClick={() => updateQuantity(product.id, quantity - 1)}
-                              className="p-1.5 text-[#9CA3AF] hover:text-[#EDEDED] transition-colors min-h-[36px] min-w-[36px] flex items-center justify-center"
+                              className="p-1.5 text-fg-muted hover:text-fg transition-colors min-h-[36px] min-w-[36px] flex items-center justify-center"
                               aria-label="Decrease quantity"
                             >
                               <Minus size={14} />
                             </button>
-                            <span className="text-sm font-medium text-[#EDEDED] w-6 text-center">
+                            <span className="text-sm font-medium text-fg w-6 text-center">
                               {quantity}
                             </span>
                             <button
                               onClick={() => updateQuantity(product.id, quantity + 1)}
-                              className="p-1.5 text-[#9CA3AF] hover:text-[#EDEDED] transition-colors min-h-[36px] min-w-[36px] flex items-center justify-center"
+                              className="p-1.5 text-fg-muted hover:text-fg transition-colors min-h-[36px] min-w-[36px] flex items-center justify-center"
                               aria-label="Increase quantity"
                             >
                               <Plus size={14} />
@@ -182,7 +182,7 @@ export function CartDrawer() {
                           </div>
                           <button
                             onClick={() => removeItem(product.id)}
-                            className="text-xs text-[#6B7280] hover:text-red-400 transition-colors"
+                            className="text-xs text-fg-faint hover:text-red-400 transition-colors"
                           >
                             Remove
                           </button>
@@ -190,7 +190,7 @@ export function CartDrawer() {
                       </div>
 
                       {/* Line total */}
-                      <p className="text-sm font-semibold text-[#EDEDED] shrink-0">
+                      <p className="text-sm font-semibold text-fg shrink-0">
                         {formatPrice(product.price * quantity)}
                       </p>
                     </li>
@@ -202,10 +202,10 @@ export function CartDrawer() {
 
           {/* Footer — fixed at bottom */}
           {!isEmpty && (
-            <div className="border-t border-[#1F1F1F] px-6 py-5 space-y-4">
+            <div className="border-t border-edge px-6 py-5 space-y-4">
               <div className="flex items-center justify-between">
-                <span className="text-[#9CA3AF]">Subtotal</span>
-                <span className="text-xl font-bold text-[#EDEDED]">
+                <span className="text-fg-muted">Subtotal</span>
+                <span className="text-xl font-bold text-fg">
                   {formatPrice(total)}
                 </span>
               </div>
@@ -234,7 +234,7 @@ export function CartDrawer() {
                 )}
               </Button>
 
-              <p className="text-xs text-center text-[#6B7280]">
+              <p className="text-xs text-center text-fg-faint">
                 Secure checkout via Stripe · Instant email delivery
               </p>
             </div>

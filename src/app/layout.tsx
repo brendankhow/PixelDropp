@@ -55,7 +55,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={inter.variable}>
-      <body className="min-h-screen bg-[#0A0A0A] text-[#EDEDED] antialiased">
+      <head>
+        {/* Prevent flash of wrong theme */}
+        <script dangerouslySetInnerHTML={{ __html: `(function(){try{if(localStorage.getItem('theme')==='light')document.documentElement.classList.add('light');}catch(e){}})();` }} />
+      </head>
+      <body className="min-h-screen antialiased">
         {children}
       </body>
     </html>

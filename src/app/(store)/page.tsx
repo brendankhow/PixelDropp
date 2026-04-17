@@ -9,13 +9,7 @@ export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: 'PixelDrop — Beautiful Digital Wallpapers',
-  description:
-    'Hand-crafted wallpapers for iPhone, desktop and beyond. Instant delivery to your inbox.',
-  openGraph: {
-    title: 'PixelDrop — Beautiful Digital Wallpapers',
-    description:
-      'Hand-crafted wallpapers for iPhone, desktop and beyond. Instant delivery to your inbox.',
-  },
+  description: 'Hand-crafted wallpapers for iPhone, desktop and beyond. Instant delivery to your inbox.',
 };
 
 export default async function HomePage() {
@@ -29,7 +23,6 @@ export default async function HomePage() {
       .select('*')
       .eq('is_active', true)
       .order('created_at', { ascending: false });
-
     if (fetchError) throw fetchError;
     products = (data as Product[]) ?? [];
   } catch (e) {
@@ -40,33 +33,30 @@ export default async function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative overflow-hidden bg-[#0A0A0A]">
-        {/* Background gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#5B21B6]/20 via-transparent to-transparent pointer-events-none" />
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#5B21B6]/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4 pointer-events-none" />
+      <section className="relative overflow-hidden bg-page">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-transparent pointer-events-none" />
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4 pointer-events-none" />
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-24 sm:pt-28 sm:pb-32 text-center">
-          <div className="inline-flex items-center gap-2 rounded-full bg-[#5B21B6]/10 border border-[#5B21B6]/30 px-4 py-1.5 mb-6">
-            <span className="text-xs font-medium text-[#A78BFA]">
-              ✦ Instant delivery to your inbox
-            </span>
+          <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 border border-primary/30 px-4 py-1.5 mb-6">
+            <span className="text-xs font-medium text-[#A78BFA]">✦ Instant delivery to your inbox</span>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#EDEDED] leading-tight tracking-tight max-w-3xl mx-auto">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-fg leading-tight tracking-tight max-w-3xl mx-auto">
             Beautiful wallpapers for{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#5B21B6] to-[#A78BFA]">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-[#A78BFA]">
               every screen
             </span>
           </h1>
 
-          <p className="mt-6 text-lg sm:text-xl text-[#9CA3AF] max-w-xl mx-auto leading-relaxed">
+          <p className="mt-6 text-lg sm:text-xl text-fg-muted max-w-xl mx-auto leading-relaxed">
             Hand-crafted for iPhone, desktop and beyond. Instant delivery to your inbox.
           </p>
 
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href="#products"
-              className="inline-flex items-center justify-center gap-2 bg-[#5B21B6] hover:bg-[#6D28D9] active:bg-[#4C1D95] text-white font-semibold px-8 py-4 rounded-xl transition-colors min-h-[52px] text-base"
+              className="inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-h active:bg-[#4C1D95] text-white font-semibold px-8 py-4 rounded-xl transition-colors min-h-[52px] text-base"
             >
               Shop Wallpapers
             </a>
@@ -75,23 +65,14 @@ export default async function HomePage() {
       </section>
 
       {/* Trust bar */}
-      <div className="border-y border-[#1F1F1F] bg-[#0D0D0D]">
+      <div className="border-y border-edge bg-page-alt">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-8 text-sm text-[#9CA3AF]">
-            <span className="flex items-center gap-2">
-              <span className="text-emerald-400 font-bold">✓</span>
-              Instant email delivery
-            </span>
-            <span className="hidden sm:block text-[#2D2D2D]">·</span>
-            <span className="flex items-center gap-2">
-              <span className="text-emerald-400 font-bold">✓</span>
-              High resolution files
-            </span>
-            <span className="hidden sm:block text-[#2D2D2D]">·</span>
-            <span className="flex items-center gap-2">
-              <span className="text-emerald-400 font-bold">✓</span>
-              Secure checkout via Stripe
-            </span>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-8 text-sm text-fg-muted">
+            <span className="flex items-center gap-2"><span className="text-emerald-400 font-bold">✓</span>Instant email delivery</span>
+            <span className="hidden sm:block text-edge-2">·</span>
+            <span className="flex items-center gap-2"><span className="text-emerald-400 font-bold">✓</span>High resolution files</span>
+            <span className="hidden sm:block text-edge-2">·</span>
+            <span className="flex items-center gap-2"><span className="text-emerald-400 font-bold">✓</span>Secure checkout via Stripe</span>
           </div>
         </div>
       </div>
@@ -102,13 +83,7 @@ export default async function HomePage() {
           <p className="text-red-400">{error}</p>
         </div>
       ) : (
-        <Suspense
-          fallback={
-            <div className="flex justify-center py-24">
-              <Spinner size="lg" />
-            </div>
-          }
-        >
+        <Suspense fallback={<div className="flex justify-center py-24"><Spinner size="lg" /></div>}>
           <ProductGrid products={products} />
         </Suspense>
       )}

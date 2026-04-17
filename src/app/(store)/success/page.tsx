@@ -52,21 +52,21 @@ export default async function SuccessPage({ searchParams }: SuccessPageProps) {
         </div>
 
         {/* Heading */}
-        <h1 className="text-3xl sm:text-4xl font-bold text-[#EDEDED] mb-3">
+        <h1 className="text-3xl sm:text-4xl font-bold text-fg mb-3">
           Payment successful!
         </h1>
 
-        <p className="text-lg text-[#9CA3AF] mb-2">
+        <p className="text-lg text-fg-muted mb-2">
           We&apos;re sending your wallpapers to{' '}
-          <span className="text-[#EDEDED] font-medium">{email}</span>
+          <span className="text-fg font-medium">{email}</span>
         </p>
-        <p className="text-sm text-[#6B7280] mb-10">
+        <p className="text-sm text-fg-faint mb-10">
           They&apos;ll arrive within 1–2 minutes. Check your spam folder too.
         </p>
 
         {/* Order summary card */}
-        <div className="bg-[#111111] border border-[#1F1F1F] rounded-2xl p-6 mb-8 text-left">
-          <h2 className="text-sm font-semibold text-[#9CA3AF] uppercase tracking-wider mb-4">
+        <div className="bg-card border border-edge rounded-2xl p-6 mb-8 text-left">
+          <h2 className="text-sm font-semibold text-fg-muted uppercase tracking-wider mb-4">
             Order Summary
           </h2>
 
@@ -77,13 +77,13 @@ export default async function SuccessPage({ searchParams }: SuccessPageProps) {
                   key={item.id}
                   className="flex items-center justify-between gap-4"
                 >
-                  <span className="text-sm text-[#EDEDED] truncate">
+                  <span className="text-sm text-fg truncate">
                     {item.description ?? item.price?.product?.toString() ?? 'Product'}
                     {item.quantity && item.quantity > 1 && (
-                      <span className="text-[#6B7280] ml-1">× {item.quantity}</span>
+                      <span className="text-fg-faint ml-1">× {item.quantity}</span>
                     )}
                   </span>
-                  <span className="text-sm font-medium text-[#EDEDED] shrink-0">
+                  <span className="text-sm font-medium text-fg shrink-0">
                     {formatPrice(item.amount_total ?? 0)}
                   </span>
                 </li>
@@ -91,9 +91,9 @@ export default async function SuccessPage({ searchParams }: SuccessPageProps) {
             </ul>
           ) : null}
 
-          <div className="border-t border-[#1F1F1F] pt-4 flex items-center justify-between">
-            <span className="text-sm text-[#9CA3AF]">Total paid</span>
-            <span className="text-xl font-bold text-[#EDEDED]">
+          <div className="border-t border-edge pt-4 flex items-center justify-between">
+            <span className="text-sm text-fg-muted">Total paid</span>
+            <span className="text-xl font-bold text-fg">
               {formatPrice(amountTotal)}
             </span>
           </div>
@@ -106,7 +106,7 @@ export default async function SuccessPage({ searchParams }: SuccessPageProps) {
             href={shareUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[#1F1F1F] border border-[#2D2D2D] text-[#EDEDED] text-sm font-medium hover:bg-[#2D2D2D] transition-colors min-h-[48px]"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-edge border border-edge-2 text-fg text-sm font-medium hover:bg-[#2D2D2D] transition-colors min-h-[48px]"
           >
             Share on X
             <ExternalLink size={14} />
@@ -122,7 +122,7 @@ export default async function SuccessPage({ searchParams }: SuccessPageProps) {
         </div>
 
         {/* Footnote */}
-        <p className="mt-8 text-xs text-[#6B7280]">
+        <p className="mt-8 text-xs text-fg-faint">
           Download links expire in 48 hours. If you don&apos;t receive an email, reply to
           your order confirmation and we&apos;ll resend it.
         </p>

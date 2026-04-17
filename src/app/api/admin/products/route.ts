@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { randomUUID } from 'crypto';
+import { revalidatePath } from 'next/cache';
 import { createClient, createServiceClient } from '@/lib/supabase/server';
 import { stripe } from '@/lib/stripe';
 
@@ -173,6 +174,9 @@ export async function POST(request: NextRequest) {
   if (dbError) {
     return NextResponse.json({ error: dbError.message }, { status: 500 });
   }
+
+  revalidatePath('/');
+  revalidatePath('/products/[slug]', 'page');
 
   return NextResponse.json(product, { status: 201 });
 }

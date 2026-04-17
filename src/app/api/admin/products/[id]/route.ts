@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { randomUUID } from 'crypto';
+import { revalidatePath } from 'next/cache';
 import { createClient, createServiceClient } from '@/lib/supabase/server';
 import { stripe } from '@/lib/stripe';
 import type { Product } from '@/types';
@@ -68,6 +69,8 @@ export async function PATCH(request: NextRequest, { params }: Params) {
       .single();
 
     if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    revalidatePath('/');
+    revalidatePath('/products/[slug]', 'page');
     return NextResponse.json(data);
   }
 
@@ -189,6 +192,9 @@ export async function PATCH(request: NextRequest, { params }: Params) {
     return NextResponse.json({ error: updateError.message }, { status: 500 });
   }
 
+  revalidatePath('/');
+  revalidatePath('/products/[slug]', 'page');
+
   return NextResponse.json(data);
 }
 
@@ -206,5 +212,7 @@ export async function DELETE(_request: NextRequest, { params }: Params) {
     .eq('id', id);
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  revalidatePath('/');
+  revalidatePath('/products/[slug]', 'page');
   return NextResponse.json({ success: true });
 }
